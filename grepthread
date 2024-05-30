@@ -1,0 +1,11 @@
+#!/bin/bash
+
+dir=$(dirname "$0")
+
+PATH=${PATH}:"${dir}"
+export PATH
+
+# "MIServerWorker-6" daemon prio=10 tid=0x00007f2258155000 nid=0x2099 runnable [0x00007f223c658000]
+
+grepblocks.py -b '^(("[^"]*" .*\[0x[0-9a-fA-F]+\])|())$' "$@"
+# egrep -e '^"[^"]*" .*\[0x[0-9]+\]$' "$@"

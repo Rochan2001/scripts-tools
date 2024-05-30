@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat "$@" | egrep '^[ \t]*(PID|[0-9]+)[ \t]' | awk 'BEGIN {n = 0;} {if ($1 == "PID") n++; else { s[$1] += $9; if (c[$1] == "") for (i=12; i <= NF; i++) { c[$1] = c[$1] $i; }}} END {for (i in s) {printf ("%-8d  0x%x  %2.2f  %s\n", i, i, s[i]/n, c[i]);}}' | sort -k3,3 -nr
